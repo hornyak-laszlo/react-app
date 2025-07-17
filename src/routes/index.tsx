@@ -12,14 +12,13 @@ import {
 } from 'recharts';
 import * as React from 'react';
 
-// https://honolulu-api.datausa.io/tesseract/data.jsonrecords?cube=pums_5&drilldowns=Nation,Year&measures=Total+Population
+const API_URL =
+  'https://honolulu-api.datausa.io/tesseract/data.jsonrecords?cube=pums_5&drilldowns=Nation,Year&measures=Total+Population';
 
 export const Route = createFileRoute('/')({
   component: App,
   loader: async (): Promise<PopulationData[]> => {
-    const response = await fetch(
-      'https://honolulu-api.datausa.io/tesseract/data.jsonrecords?cube=pums_5&drilldowns=Nation,Year&measures=Total+Population',
-    );
+    const response = await fetch(API_URL);
     const jsonResponse = (await response.json()) as ApiResponse;
     return jsonResponse.data
       .filter((d) => d['Nation ID'] === '01000US')
