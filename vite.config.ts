@@ -1,6 +1,6 @@
 import viteReact from '@vitejs/plugin-react';
 
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import { resolve } from 'node:path';
 
