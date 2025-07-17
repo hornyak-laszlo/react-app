@@ -1,5 +1,15 @@
 import type { ApiResponse, PopulationData } from '@/types';
 import { createFileRoute } from '@tanstack/react-router';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import * as React from 'react';
 
 // https://honolulu-api.datausa.io/tesseract/data.jsonrecords?cube=pums_5&drilldowns=Nation,Year&measures=Total+Population
@@ -37,7 +47,7 @@ function App() {
         style={{ marginTop: '2rem', marginBottom: '2rem' }}
       >
         <hgroup>
-          <h1>USA population data history</h1>
+          <h1>USA population history</h1>
         </hgroup>
       </header>
       <main className="container">
@@ -57,7 +67,22 @@ function App() {
             <option value="5">5 years</option>
             <option value="10">10 years</option>
           </select>
-          <pre>{JSON.stringify(filteredData, null, 2)}</pre>
+
+          <div style={{ width: '100%', height: 600 }}>
+            <ResponsiveContainer>
+              <BarChart
+                data={filteredData}
+                margin={{ top: 20, right: 30, left: 80, bottom: 5 }}
+              >
+                <CartesianGrid />
+                <XAxis dataKey="year" />
+                <YAxis tickCount={10} domain={[300000000, 'auto']} />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="population" fill="#3B82F6" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </section>
       </main>
     </>
